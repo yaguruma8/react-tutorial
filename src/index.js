@@ -1,14 +1,23 @@
 import React from 'react';
+import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 
 const Square = (props) => {
+  const [value, setValue] = useState(null);
+
   return (
-    <button className='square'>
-      {props.value}
+    <button
+      className='square'
+      onClick={() => {
+        console.log('click');
+        setValue((prev) => 'X')
+      }}
+    >
+      {value}
     </button>
   );
-}
+};
 
 const Board = () => {
   function renderSquare(i) {
@@ -37,7 +46,7 @@ const Board = () => {
       </div>
     </div>
   );
-}
+};
 
 const Game = () => {
   return (
@@ -51,12 +60,10 @@ const Game = () => {
       </div>
     </div>
   );
-}
-
+};
 
 // ======================================== render
 
-const container =  document.getElementById('root');
+const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(<Game />)
-
+root.render(<Game />);
