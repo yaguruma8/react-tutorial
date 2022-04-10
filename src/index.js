@@ -2,13 +2,17 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 
-const Square = () => {
-  return <button className='square'>{/* TODO */}</button>;
+const Square = (props) => {
+  return (
+    <button className='square'>
+      {props.value}
+    </button>
+  );
 }
 
 const Board = () => {
   function renderSquare(i) {
-    return <Square />;
+    return <Square value={i} />;
   }
 
   const status = 'Next player: X';
