@@ -28,7 +28,7 @@ const Board = () => {
   function handleClick(i) {
     const newSquares = [...squares];
     newSquares[i] = 'X';
-    setSquares((prev) => newSquares);
+    setSquares(newSquares);
   }
 
   const status = 'Next player: X';
