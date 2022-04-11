@@ -4,24 +4,31 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 
 const Square = (props) => {
-  const [value, setValue] = useState(null);
-
   return (
-    <button
-      className='square'
-      onClick={() => {
-        console.log('click');
-        setValue((prev) => 'X')
-      }}
-    >
-      {value}
+    <button className='square' onClick={props.onClick}>
+      {props.value}
     </button>
   );
 };
 
 const Board = () => {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+
   function renderSquare(i) {
-    return <Square value={i} />;
+    return (
+      <Square
+        value={squares[i]}
+        onClick={() => {
+          handleClick(i);
+        }}
+      />
+    );
+  }
+
+  function handleClick(i) {
+    const newSquares = [...squares];
+    newSquares[i] = 'X';
+    setSquares((prev) => newSquares);
   }
 
   const status = 'Next player: X';
