@@ -9,6 +9,7 @@ export const Board = (props) => {
         onClick={() => {
           props.onClick(i);
         }}
+        no={i}
       />
     );
   }
