@@ -5,10 +5,7 @@ export const Board = (props) => {
   function renderSquare(i) {
     return (
       <Square
-        value={props.squares[i]}
-        onClick={() => {
-          props.onClick(i);
-        }}
+        mark={props.squares[i]}
         no={i}
       />
     );
