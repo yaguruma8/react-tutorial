@@ -11,11 +11,11 @@ export const Game = () => {
 
   const winner = calcWinner(current.squares);
 
-  const moves = history.map((_, move) => {
-    const desc = move ? `Go to move #${move}` : 'Go to game start';
+  const steps = history.map((_, step) => {
+    const desc = step ? `Go to move #${step}` : 'Go to game start';
     return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{desc}</button>
+      <li key={step}>
+        <button onClick={() => jumpTo(step)}>{desc}</button>
       </li>
     );
   });
@@ -62,7 +62,7 @@ export const Game = () => {
       </div>
       <div className='game-info'>
         <div>{status}</div>
-        <ol>{moves}</ol>
+        <ol>{steps}</ol>
       </div>
     </div>
   );
