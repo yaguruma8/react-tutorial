@@ -3,7 +3,9 @@ import { Board } from './Board';
 import { calcWinner } from './utils';
 
 export const Game = () => {
-  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
+  const [history, setHistory] = useState([
+    { squares: Array(9).fill(null), pos: null },
+  ]);
   const [xIsNext, setXIsNext] = useState(true);
   const [stepNumber, setStepNumber] = useState(0);
 
@@ -33,15 +35,18 @@ export const Game = () => {
       return;
     }
     const newSquares = [...current.squares];
+    const pos = Number(e.target.value);
     // 既にマスが埋まっているか勝者が決まっている
-    if (newSquares[e.target.value] || winner) {
+    if (newSquares[pos] || winner) {
       e.stopPropagation();
       return;
     }
 
-    newSquares[e.target.value] = xIsNext ? 'X' : 'O';
-    const pastHistory = history.slice(0, stepNumber + 1);
-    setHistory([...pastHistory, { squares: newSquares }]);
+    newSquares[pos] = xIsNext ? 'X' : 'O';
+    const prevHistory = history.slice(0, stepNumber + 1);
+    const newHistory = { squares: newSquares, pos: pos };
+    console.log(newHistory);
+    setHistory([...prevHistory, newHistory]);
     setXIsNext((prev) => !prev);
     setStepNumber((prev) => prev + 1);
 
