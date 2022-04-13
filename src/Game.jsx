@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Board } from './Board';
-import { calcWinner } from './utils';
+import { calcWinner, calcCoordinate } from './utils';
 
 export const Game = () => {
   const [history, setHistory] = useState([
@@ -13,8 +13,11 @@ export const Game = () => {
 
   const winner = calcWinner(current.squares);
 
-  const steps = history.map((_, step) => {
-    const desc = step ? `Go to move #${step}` : 'Go to game start';
+  const steps = history.map((item, step) => {
+    const coordinate = calcCoordinate(item.pos);
+    const desc = step
+      ? `Go to move #${step} (${coordinate.col}, ${coordinate.row})`
+      : 'Go to game start';
     return (
       <li key={step}>
         <button onClick={() => jumpTo(step)}>{desc}</button>
@@ -45,7 +48,6 @@ export const Game = () => {
     newSquares[pos] = xIsNext ? 'X' : 'O';
     const prevHistory = history.slice(0, stepNumber + 1);
     const newHistory = { squares: newSquares, pos: pos };
-    console.log(newHistory);
     setHistory([...prevHistory, newHistory]);
     setXIsNext((prev) => !prev);
     setStepNumber((prev) => prev + 1);
