@@ -20,7 +20,12 @@ export const Game = () => {
       : 'Go to game start';
     return (
       <li key={step}>
-        <button onClick={() => jumpTo(step)}>{desc}</button>
+        <button
+          onClick={() => jumpTo(step)}
+          className={step === stepNumber ? 'current-history' : ''}
+        >
+          {desc}
+        </button>
       </li>
     );
   });
