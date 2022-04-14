@@ -13,6 +13,10 @@ export const Game = () => {
 
   const winner = calcWinner(current.squares);
 
+  const status = winner
+    ? `Winner: ${winner}`
+    : `Next player: ${xIsNext ? 'X' : 'O'}`;
+
   const steps = history.map((item, step) => {
     const coordinate = calcCoordinate(item.pos);
     const desc = step
@@ -37,19 +41,19 @@ export const Game = () => {
 
   function handleClick(e) {
     e.preventDefault();
-    // マス以外のdiv.game-boardの範囲をクリックした場合
+    // マス以外のdiv.game-boardの範囲をクリックした場合は何もしない
     if (e.target.value === undefined) {
       e.stopPropagation();
       return;
     }
     const newSquares = [...current.squares];
     const pos = Number(e.target.value);
-    // 既にマスが埋まっているか勝者が決まっている
+    // 既にマスが埋まっているか勝者が決まっている場合は何もしない
     if (newSquares[pos] || winner) {
       e.stopPropagation();
       return;
     }
-
+    // 現在の着手位置まで履歴を切り詰めてから新しい履歴を追加する
     newSquares[pos] = xIsNext ? 'X' : 'O';
     const prevHistory = history.slice(0, stepNumber + 1);
     const newHistory = { squares: newSquares, pos: pos };
@@ -58,13 +62,6 @@ export const Game = () => {
     setStepNumber((prev) => prev + 1);
 
     e.stopPropagation();
-  }
-
-  let status;
-  if (winner) {
-    status = `Winner: ${winner}`;
-  } else {
-    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
   }
 
   return (
