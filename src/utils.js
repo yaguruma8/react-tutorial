@@ -16,3 +16,12 @@ export function calcWinner(squares) {
   }
   return null;
 }
+
+export function calcCoordinate(pos) {
+  if (pos === null) {
+    return null;
+  }
+  const col = Math.floor(pos / 3) + 1;
+  const row = (pos % 3) + 1;
+  return {col, row};
+}
