@@ -75,7 +75,7 @@ export const Game = () => {
         >
           {isAsc ? 'change ↓' : 'change ↑'}
         </button>
-        <ol>{steps}</ol>
+        {isAsc ? <ol>{steps}</ol> : <ol reversed>{steps.reverse()}</ol>}
       </div>
     </div>
   );
