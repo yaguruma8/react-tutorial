@@ -8,6 +8,7 @@ export const Game = () => {
   ]);
   const [xIsNext, setXIsNext] = useState(true);
   const [stepNumber, setStepNumber] = useState(0);
+  const [isAsc, setIsAsc] = useState(true);
 
   const current = history[stepNumber];
 
@@ -62,10 +63,18 @@ export const Game = () => {
   return (
     <div className='game'>
       <div className='game-board'>
-        <Board squares={current.squares} onClick={(e) => handleClick(e)}/>
+        <Board squares={current.squares} onClick={(e) => handleClick(e)} />
       </div>
       <div className='game-info'>
         <div>{status}</div>
+        <button
+          className='toggle-button'
+          onClick={() => {
+            setIsAsc((prev) => !prev);
+          }}
+        >
+          {isAsc ? 'change ↓' : 'change ↑'}
+        </button>
         <ol>{steps}</ol>
       </div>
     </div>
