@@ -41,11 +41,6 @@ export const Game = () => {
 
   function handleClick(e) {
     e.preventDefault();
-    // マス以外のdiv.game-boardの範囲をクリックした場合は何もしない
-    if (e.target.value === undefined) {
-      e.stopPropagation();
-      return;
-    }
     const newSquares = [...current.squares];
     const pos = Number(e.target.value);
     // 既にマスが埋まっているか勝者が決まっている場合は何もしない
@@ -66,8 +61,8 @@ export const Game = () => {
 
   return (
     <div className='game'>
-      <div className='game-board' onClick={(e) => handleClick(e)}>
-        <Board squares={current.squares} />
+      <div className='game-board'>
+        <Board squares={current.squares} onClick={(e) => handleClick(e)}/>
       </div>
       <div className='game-info'>
         <div>{status}</div>

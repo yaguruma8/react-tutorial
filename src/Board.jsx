@@ -20,5 +20,5 @@ export const Board = (props) => {
     );
   }
 
-  return <div>{grid}</div>;
+  return <div onClick={(e) => props.onClick(e)}>{grid}</div>;
 };
