@@ -1,33 +1,24 @@
-import { Square } from "./Square";
-
+import { Square } from './Square';
+import { Fragment } from 'react';
 
 export const Board = (props) => {
   function renderSquare(i) {
-    return (
-      <Square
-        mark={props.squares[i]}
-        no={i}
-      />
+    return <Square mark={props.squares[i]} no={i} />;
+  }
+
+  let grid = [];
+  for (let y = 0; y < 3; y++) {
+    let row = [];
+    for (let x = 0; x < 3; x++) {
+      const serialNo = 3 * y + x;
+      row.push(<Fragment key={serialNo}>{renderSquare(serialNo)}</Fragment>);
+    }
+    grid.push(
+      <div className='board-row' key={y}>
+        {row}
+      </div>
     );
   }
 
-  return (
-    <div>
-      <div className='board-row'>
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className='board-row'>
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className='board-row'>
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-    </div>
-  );
+  return <div>{grid}</div>;
 };
