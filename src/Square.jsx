@@ -1,6 +1,9 @@
 export const Square = (props) => {
   return (
-    <button className='square' value={props.no}>
+    <button
+      className={props.isWin ? 'square win-square' : 'square'}
+      value={props.num}
+    >
       {props.mark}
     </button>
   );

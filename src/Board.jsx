@@ -1,9 +1,16 @@
 import { Square } from './Square';
 import { Fragment } from 'react';
+import { isWinSquare } from './utils';
 
 export const Board = (props) => {
   function renderSquare(i) {
-    return <Square mark={props.squares[i]} no={i} />;
+    return (
+      <Square
+        mark={props.squares[i]}
+        num={i}
+        isWin={isWinSquare(props.squares, i)}
+      />
+    );
   }
 
   const grid = [];
