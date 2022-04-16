@@ -25,3 +25,7 @@ export function calcCoordinate(pos) {
   const row = (pos % 3) + 1;
   return {col, row};
 }
+
+export function isWinSquare(squares, num) {
+  return true;
+}
