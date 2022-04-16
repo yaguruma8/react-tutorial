@@ -42,17 +42,18 @@ export const Game = () => {
 
   function handleClick(e) {
     e.preventDefault();
-    const newSquares = [...current.squares];
+    const current = history[stepNumber];
+    const squares = [...current.squares];
     const pos = Number(e.target.value);
     // 既にマスが埋まっているか勝者が決まっている場合は何もしない
-    if (newSquares[pos] || winner) {
+    if (squares[pos] || calcWinner(squares)) {
       e.stopPropagation();
       return;
     }
     // 現在の着手位置まで履歴を切り詰めてから新しい履歴を追加する
-    newSquares[pos] = xIsNext ? 'X' : 'O';
+    squares[pos] = xIsNext ? 'X' : 'O';
     const prevHistory = history.slice(0, stepNumber + 1);
-    const newHistory = { squares: newSquares, pos: pos };
+    const newHistory = { squares, pos };
     setHistory([...prevHistory, newHistory]);
     setXIsNext((prev) => !prev);
     setStepNumber((prev) => prev + 1);
