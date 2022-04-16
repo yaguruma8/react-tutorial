@@ -60,6 +60,10 @@ export const Game = () => {
     e.stopPropagation();
   }
 
+  function toggle() {
+    setIsAsc((prev) => !prev);
+  }
+
   return (
     <div className='game'>
       <div className='game-board'>
@@ -67,12 +71,7 @@ export const Game = () => {
       </div>
       <div className='game-info'>
         <div>{status}</div>
-        <button
-          className='toggle-button'
-          onClick={() => {
-            setIsAsc((prev) => !prev);
-          }}
-        >
+        <button className='toggle-button' onClick={() => toggle()}>
           {isAsc ? 'change ↓' : 'change ↑'}
         </button>
         {isAsc ? <ol>{steps}</ol> : <ol reversed>{steps.reverse()}</ol>}
