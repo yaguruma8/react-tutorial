@@ -57,3 +57,7 @@ ol, ul {
   margin-left: 30px;
   margin-top: 10px;
 }
+
+.win-square {
+  background-color: gold;
+}
