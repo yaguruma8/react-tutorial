@@ -1,15 +1,16 @@
+const winLines = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 export function calcWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (const [a, b, c] of lines) {
+  for (const [a, b, c] of winLines) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
@@ -31,17 +32,7 @@ export function isWinSquare(squares, num) {
   if (!calcWinner(squares)) {
     return false;
   }
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  const filterLines = lines.filter((line) => line.includes(num));
+  const filterLines = winLines.filter((line) => line.includes(num));
   for (const [a, b, c] of filterLines) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return true;
