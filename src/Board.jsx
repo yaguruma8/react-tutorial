@@ -7,7 +7,7 @@ export const Board = (props) => {
     return (
       <Square
         mark={props.squares[i]}
-        num={i}
+        onClick={() => props.onClick(i)}
         isWin={isWinSquare(props.squares, i)}
       />
     );
@@ -27,5 +27,5 @@ export const Board = (props) => {
     );
   }
 
-  return <div onClick={(e) => props.onClick(e)}>{grid}</div>;
+  return <div>{grid}</div>;
 };

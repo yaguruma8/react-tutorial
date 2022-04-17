@@ -2,7 +2,7 @@ export const Square = (props) => {
   return (
     <button
       className={props.isWin ? 'square win-square' : 'square'}
-      data-num={props.num}
+      onClick={props.onClick}
     >
       {props.mark}
     </button>
