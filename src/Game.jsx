@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Board } from './Board';
-import { calcWinner, calcCoordinate } from './utils';
+import { calcWinner, calcCoordinate, isDraw } from './utils';
 
 export const Game = () => {
   const [history, setHistory] = useState([
@@ -14,9 +14,14 @@ export const Game = () => {
 
   const winner = calcWinner(current.squares);
 
-  const status = winner
-    ? `Winner: ${winner}`
-    : `Next player: ${xIsNext ? 'X' : 'O'}`;
+  let status;
+  if (isDraw(current.squares)) {
+    status = `This game is draw.`;
+  } else if (winner) {
+    status = `Winner: ${winner}`;
+  } else {
+    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+  }
 
   const steps = history.map((item, step) => {
     const coordinate = calcCoordinate(item.pos);

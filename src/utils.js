@@ -49,3 +49,7 @@ export function isWinSquare(squares, num) {
   }
   return false;
 }
+
+export function isDraw(squares) {
+  return !squares.includes(null) && !calcWinner(squares);
+}
