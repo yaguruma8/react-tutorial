@@ -44,9 +44,8 @@ export const Game = () => {
     e.preventDefault();
     const current = history[stepNumber];
     const squares = [...current.squares];
-    const pos = Number(e.target.value);
-    // 既にマスが埋まっているか勝者が決まっている場合は何もしない
-    if (squares[pos] || calcWinner(squares)) {
+    const pos = Number(e.target.dataset.num);
+    if (Number.isNaN(pos) || squares[pos] || calcWinner(squares)) {
       e.stopPropagation();
       return;
     }
