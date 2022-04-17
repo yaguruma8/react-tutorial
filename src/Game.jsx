@@ -40,13 +40,11 @@ export const Game = () => {
     setXIsNext(step % 2 === 0);
   }
 
-  function handleClick(e) {
-    e.preventDefault();
+  function handleClick(i) {
     const current = history[stepNumber];
     const squares = [...current.squares];
-    const pos = Number(e.target.dataset.num);
-    if (Number.isNaN(pos) || squares[pos] || calcWinner(squares)) {
-      e.stopPropagation();
+    const pos = Number(i);
+    if (squares[pos] || calcWinner(squares)) {
       return;
     }
     // 現在の着手位置まで履歴を切り詰めてから新しい履歴を追加する
@@ -56,8 +54,6 @@ export const Game = () => {
     setHistory([...prevHistory, newHistory]);
     setXIsNext((prev) => !prev);
     setStepNumber((prev) => prev + 1);
-
-    e.stopPropagation();
   }
 
   function toggle() {
@@ -67,7 +63,7 @@ export const Game = () => {
   return (
     <div className='game'>
       <div className='game-board'>
-        <Board squares={current.squares} onClick={(e) => handleClick(e)} />
+        <Board squares={current.squares} onClick={(i) => handleClick(i)} />
       </div>
       <div className='game-info'>
         <div>{status}</div>
