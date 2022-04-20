@@ -48,5 +48,5 @@ export function isDraw(squares) {
 function isFilledSameMark(squares, line) {
   // lineの各番号のマスが全てnullでなく、かつ、全て同じMarkならtrue
   const first = squares[line[0]];
-  return line.every((v) => squares[v] !== null && first === squares[v]);
+  return line.every((v) => squares[v] !== null && squares[v] === first);
 }
