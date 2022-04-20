@@ -10,9 +10,9 @@ const winLines = [
 ];
 
 export function calcWinner(squares) {
-  for (const [a, b, c] of winLines) {
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+  for (const line of winLines) {
+    if (isFilledSameMark(squares, line)) {
+      return squares[line[0]];
     }
   }
   return null;
@@ -33,8 +33,8 @@ export function isWinSquare(squares, num) {
     return false;
   }
   const filterLines = winLines.filter((line) => line.includes(num));
-  for (const [a, b, c] of filterLines) {
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+  for (const line of filterLines) {
+    if (isFilledSameMark(squares, line)) {
       return true;
     }
   }
@@ -43,4 +43,10 @@ export function isWinSquare(squares, num) {
 
 export function isDraw(squares) {
   return !squares.includes(null) && !calcWinner(squares);
+}
+
+function isFilledSameMark(squares, line) {
+  // lineの各番号のマスが全てnullでなく、かつ、全て同じMarkならtrue
+  const first = squares[line[0]];
+  return line.every((v) => squares[v] !== null && first === squares[v]);
 }
